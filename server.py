@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
 
+
+#rename db to users.db , reinstantiate the db and make a new fake user to see if it works when done
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///profiles.db'
 db = SQLAlchemy(app)
@@ -25,8 +27,7 @@ class User(db.Model):
     #add picture as well when you've got time (SQLAlchemy-ImageAttach)
 
     def __repr__(self):
-        return  'Name: ' + str(self.firstname) + ' ' + str(self.firstname) + '.' + 'Birthday: ' + date(self.birthday) + '.' +'Role: ' + str(self.role) + '.' + 'Info: ' + str(self.about)
-
+        return  'name: ' + str(self.firstname) + ' ' + str(self.lastname) + ', ' + 'birthday: ' + str(self.birthday)  + ', ' + 'role :' + str(self.role)  + ', ' + 'about :' + str(self.about)
 
 
 #uncomment to create database if not already in directory
@@ -44,6 +45,14 @@ class User(db.Model):
 def index():
     return render_template('index.html')
 
+@app.route('/showall', methods=['GET', 'POST'])
+def showallusers():
+    allusers = User.query.all()
+    return jsonify(allusers)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
