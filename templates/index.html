@@ -1,17 +1,24 @@
 {% extends "base.html" %}
 
-{% block head %}
-<link rel="stylesheet" href="/static/main.css">
-{% endblock head %}
+{% block head %}{% endblock %}
 
-    {% block title %}
-        Sebs Wiki
-    {% endblock title %}
+    {% block title %}{% endblock %}
 
     {% block body %}
-    <div class="container">
-        <h1 class ="text">Container and Text</h1>
-        <!-- Content here -->
+
+    <div class="jumbotron">
+        <h1 class="display-4">Sebastian's Wiki</h1>
+        <p class="lead">Here you can find information about all your colleagues from the Sebastian Co.</p>
       </div>
-    {% endblock body %}
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            Info on Teammembers goes here
+          </div>
+          <div class="col">
+            Signup new members goes here
+          </div>
+        </div>
+    {% endblock %}
 

@@ -35,7 +35,6 @@ class User(db.Model):
 #create test user for development purposes
 #testuser = User(firstname='Sebastian', lastname='Croy', birthday=date(1995, 2, 19), role='Head Developer', about='I cannot deliver assignements on time')
 
-
 #add testuser to db
 #db.session.add(testuser)
 #db.session.commit()
@@ -46,5 +45,5 @@ def index():
     return render_template('index.html')
 
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
