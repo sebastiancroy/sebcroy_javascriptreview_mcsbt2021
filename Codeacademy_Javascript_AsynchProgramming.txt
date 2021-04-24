@@ -1,0 +1,12 @@
+A promise can have three states:
+
+Pending: the initial state -> not completed
+Fulfilled: operation was successfull -> e.g. promise might resolve with JSON Object as value 
+Rejected: the opeartion has failed and promise has reason for failure -> usually an Error of some kind
+
+Settled: when promise no longer pending (Fulfilled or Rejected)
+All promises eventually settle,allowing us to write logic as what to do next
+
+
+Promise function takes function parameter called executor function (executorFunction)
+
