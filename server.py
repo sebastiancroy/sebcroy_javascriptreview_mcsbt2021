@@ -27,9 +27,6 @@ class User(db.Model):
     about = db.Column(db.String(500),unique=False,nullable=False)
     #add picture as well when you've got time (SQLAlchemy-ImageAttach)
 
-    def __repr__(self):
-        return  'name: ' + str(self.firstname) + ' ' + str(self.lastname) + ', ' + 'birthday: ' + str(self.birthday)  + ', ' + 'role :' + str(self.role)  + ', ' + 'about :' + str(self.about)
-
 
 #uncomment to create database if not already in directory
 #db.create_all()
@@ -44,15 +41,17 @@ class User(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-@app.route('/showall', methods=['GET', 'POST'])
-def showallusers():
-    allusers = User.query.all()
-    return jsonify(allusers)
+    users = User.query.all()
+    return render_template('index.html', data = users)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# data = User.query.all()
+# for User in data:
+#     print(User.firstname)
+
 
 

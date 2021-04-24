@@ -14,18 +14,26 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            Info on Teammembers goes here
+            
+          
 
+          {% for user in data %}
 
+          <div class="card" style="width: 40rem;">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card-body">
+              <h5 class="card-title">{{user.firstname + ' ' + user.lastname}}</h5>
+              <p class="card-text">Role: {{user.role}}</p>
+              <p class="card-text">Birthday: {{user.birthday}}</p>
+              <p class="card-text">About: {{user.about}}</p>
+              <a href="#" class="btn btn-primary">Remove Teammember</a>
+            </div>
+          </div>
 
-
-          <div class="col">
+          {% endfor %}
+        </div>
+          <div class="col-md-4">
             Signup new members goes here
-
-
-
-
-
 
 
 
