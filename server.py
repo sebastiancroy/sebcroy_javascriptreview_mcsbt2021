@@ -52,7 +52,6 @@ def showallusers():
     return jsonify(allusers)
 
 
-
 if __name__ == "__main__":
     app.run(debug=True)
 

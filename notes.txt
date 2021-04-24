@@ -1,2 +1,5 @@
 1) two collumns, one to display, one to add people
+2) I will just use javascript to add people, showing them is static
+    a) Flask show all database entries
+    b) when a new User is added, JS will add them to the db and reload the page
 
