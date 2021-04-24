@@ -19,11 +19,11 @@ class User(db.Model):
     #add picture as well when you've got time (SQLAlchemy-ImageAttach)
 
     id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(50), unique=True, nullable=False)
-    lastname = db.Column(db.String(50), unique=True, nullable=False)
-    birthday = db.Column(db.Date, nullable=False)
-    role = db.Column(db.String(100), unique=True, nullable=False)
-    about = db.Column(db.String(500), unique=True, nullable=False)
+    firstname = db.Column(db.String(50),unique=False, nullable=False)
+    lastname = db.Column(db.String(50),unique=False, nullable=False)
+    birthday = db.Column(db.Date,unique=False, nullable=False)
+    role = db.Column(db.String(100),unique=False,nullable=False)
+    about = db.Column(db.String(500),unique=False,nullable=False)
     #add picture as well when you've got time (SQLAlchemy-ImageAttach)
 
     def __repr__(self):
@@ -34,11 +34,11 @@ class User(db.Model):
 #db.create_all()
 
 #create test user for development purposes
-#testuser = User(firstname='Sebastian', lastname='Croy', birthday=date(1995, 2, 19), role='Head Developer', about='I cannot deliver assignements on time')
+testuser = User(firstname='Vinzent', lastname='Croyy', birthday=date(1994, 7,8), role='Brother of Head Developer', about='He doesnt know')
 
 #add testuser to db
-#db.session.add(testuser)
-#db.session.commit()
+db.session.add(testuser)
+db.session.commit()
 
 
 @app.route('/')
@@ -52,7 +52,8 @@ def showallusers():
 
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+# if __name__ == "__main__":
+#     app.run(debug=True)
 
 
