@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
+from dataclasses import dataclass
 
 
 #rename db to users.db , reinstantiate the db and make a new fake user to see if it works when done
@@ -8,7 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///profiles.db'
 db = SQLAlchemy(app)
 
-
+@dataclass
 class User(db.Model):
     id: int
     firstname: str
@@ -34,11 +35,11 @@ class User(db.Model):
 #db.create_all()
 
 #create test user for development purposes
-testuser = User(firstname='Vinzent', lastname='Croyy', birthday=date(1994, 7,8), role='Brother of Head Developer', about='He doesnt know')
+#testuser = User(firstname='Vinzent', lastname='Croyy', birthday=date(1994, 7,8), role='Brother of Head Developer', about='He doesnt know')
 
 #add testuser to db
-db.session.add(testuser)
-db.session.commit()
+#db.session.add(testuser)
+#db.session.commit()
 
 
 @app.route('/')
@@ -52,8 +53,7 @@ def showallusers():
 
 
 
-
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
