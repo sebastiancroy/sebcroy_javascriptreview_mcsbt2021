@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date, datetime
 from dataclasses import dataclass
@@ -21,10 +21,10 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(50),unique=False, nullable=False)
-    lastname = db.Column(db.String(50),unique=False, nullable=False)
-    birthday = db.Column(db.Date,unique=False, nullable=False)
-    role = db.Column(db.String(100),unique=False,nullable=False)
-    about = db.Column(db.String(500),unique=False,nullable=False)
+    lastname = db.Column(db.String(50),unique=False, nullable=True)
+    birthday = db.Column(db.Date,unique=False, nullable=True)
+    role = db.Column(db.String(100),unique=False,nullable=True)
+    about = db.Column(db.String(500),unique=False,nullable=True)
     #add picture as well when you've got time (SQLAlchemy-ImageAttach)
 
 
@@ -45,13 +45,22 @@ def index():
     return render_template('index.html', data = users)
 
 
+
+# Add User to database
+@app.route('/addUser', methods=['POST'])
+def createuser() :
+    firstname =  request.form['inputfirstname'];
+    db.execute("INSERT INTO User (firstname) VALUES (:firstname)",
+                 firstname=firstname)
+    return render_template("index.html")
+
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
-
-# data = User.query.all()
-# for User in data:
-#     print(User.firstname)
 
 
 
