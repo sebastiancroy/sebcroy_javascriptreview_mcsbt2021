@@ -1,95 +1,127 @@
 {% extends "base.html" %}
 
-{% block head %}{% endblock %}
 
-    {% block title %}{% endblock %}
+{% block body %}
 
-    {% block body %}
+<!-- JUMBOTRON -->
 
-    <div class="jumbotron">
+        <div class="jumbotron">
         <h1 class="display-4">Sebastian's Wiki</h1>
         <p class="lead">Here you can find information about all your colleagues from the Sebastian Co.</p>
-      </div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col">
-          <br>
-          <br>
-          
-
-           <div class="card" style="width: 40rem;">
-            <!-- <img src="..." class="card-img-top" alt="..."> -->
-            <div class="card-body">
-              <h5 class="card-title">Current Teammembers</h5>
-            </div></div>
-
-          {% for user in data %}
-
-          <div class="card" style="width: 40rem;">
-            <!-- <img src="..." class="card-img-top" alt="..."> -->
-            <div class="card-body">
-              <h5 class="card-title">{{user.firstname + ' ' + user.lastname}}</h5>
-              <p class="card-text">Role: {{user.role}}</p>
-              <p class="card-text">Birthday: {{user.birthday}}</p>
-              <p class="card-text">About: {{user.about}}</p>
-              <a href="#" class="btn btn-primary">Remove Teammember</a>
-            </div>
-          </div>
-
-          {% endfor %}
         </div>
-          <div class="col-md-4">
 
 
+<!-- CONTAINER FOR DISPLAY (COLLUMN1) AND SUBMIT (COLLUMN2) -->
 
-            <div class="card" style="width: 30rem;">
-              <!-- <img src="..." class="card-img-top" alt="..."> -->
-              <div class="card-body">
+            <div class="container">
+            <div class="row">
+
+
+<!-- COLUMN1 DISPLAY USERS -->
+
+
+              <div class="col">
+              <br>
+              <br>
+
+<!-- TITLE OF COLUMN1 -->
+
+                <div class="card" style="width: 40rem;">
+                <div class="card-body">
+                <h5 class="card-title">Current Teammembers</h5>
+                </div></div>
+
+<!-- FOR-LOOP THAT ITERATES THROUGH DB AND DISPLAYS USERS ON CARDS -->
+
+                  {% for user in data %}
+
+                  <div class="card" style="width: 40rem;">
+                  <div class="card-body">
+                  <h5 class="card-title">{{user.firstname + ' ' + user.lastname}}</h5>
+                  <p class="card-text">Role: {{user.role}}</p>
+                  <p class="card-text">Birthday: {{user.birthday}}</p>
+                  <p class="card-text">About: {{user.about}}</p>
+                  <a href="#" class="btn btn-danger">Remove Teammember</a>
+                  </div>
+                  </div>
+
+                  {% endfor %}
+
+                  </div>
+
+<!-- COLUMN2 ADD USERS -->
+
+              <div class="col-md-4">
+              <br>
+              <br>
+
+<!-- TITLE FOR COLUMN2 -->
+            
+                <div class="card" style="width: 30rem;">
+                <div class="card-body">
                 <h5 class="card-title">Not on here? Make a Profile!</h5>
                 <p class="card-text">
+                </div>
+
+<!-- DECLARE THE FORM THAT JAVASCRIPT WILL LOOK FOR -->
+
+                <form method="POST" id="target" action="/addUser">
+
+<!-- INPUT FOR FIRSTNAME -->
 
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">First Name:</label>
-                    <input type="firstname" class="form-control" id="inputfirstname" placeholder="John">
+                  <label for="exampleFormControlInput1" class="form-label">First Name:</label>
+                  <input type="firstname" class="form-control" name="inputfirstname" id="inputfirstname" placeholder="John" formaction="/addUser">
                   </div>
+
+<!-- INPUT FOR LASTNAME -->
+
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
-                    <input type="lastname" class="form-control" id="inputlastname" placeholder="Doe">
+                  <label for="exampleFormControlInput1" class="form-label">Last Name:</label>
+                  <input type="lastname" class="form-control" name="inputlastname" id="inputlastname" placeholder="Doe">
                   </div>
+
+<!-- INPUT FOR BIRTHDAY -->
+
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Birthday:</label>
-                    <input type="birthday" class="form-control" id="inputbirthday" placeholder="19-2-1995">
+                  <label for="exampleFormControlInput1" class="form-label">Birthday:</label>
+                  <input type="birthday" class="form-control" name="inputbirthday" id="inputbirthday" placeholder="19-2-1995">
                   </div>
+
+<!-- INPUT FOR ROLE -->
+
                   <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Company Role:</label>
-                    <input type="role" class="form-control" id="inputrole" placeholder="Facility Manager">
+                  <label for="exampleFormControlInput1" class="form-label">Company Role:</label>
+                  <input type="role" class="form-control" name="inputrole" id="inputrole" placeholder="Facility Manager">
                   </div>
+
+<!-- INPUT FOR ABOUT -->
+
                   <label for="title">Tell us about yourself! </label>
                   <br/>
                   <div class="form-floating">
-                    <textarea class="form-control" placeholder="I like Trains" id="inputabout" style="height: 100px"></textarea>
-                    <label for="floatingTextarea2"></label>
+                  <textarea class="form-control" placeholder="I like Trains" name="inputabout" id="inputabout" style="height: 100px"></textarea>
+                  <label for="floatingTextarea2"></label>
                   </div>
-                </p>
+                  </p>
 
+<!-- SUBMIT BUTTON THAT TRIGGERS addUsers.js -->
 
+                <button type="submit" id="submit" class="btn btn-success">Add yourself!</button>
+                </div>
+                </form>
+                </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                </div>
 
-                <!-- <p class="card-text"></p>
-                <p class="card-text"></p> -->
-                <a href="#" class="btn btn-primary">Add yourself!</a>
-              </div>
-            </div>
+<!-- SOURCE FOR addUsers.js -->
 
-
-
-
-
-
-
-          </div>
-        </div>
 
         <script src="{{url_for('static', filename='addUsers.js')}}"></script>
-    {% endblock %}
+
+{% endblock %}
 

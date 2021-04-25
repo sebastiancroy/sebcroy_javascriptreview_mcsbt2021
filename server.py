@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 
 #rename db to users.db , reinstantiate the db and make a new fake user to see if it works when done
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///profiles.db'
 db = SQLAlchemy(app)
@@ -17,15 +18,14 @@ class User(db.Model):
     birthday: date
     role: str
     about: str
-    #add picture as well when you've got time (SQLAlchemy-ImageAttach)
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     firstname = db.Column(db.String(50),unique=False, nullable=False)
     lastname = db.Column(db.String(50),unique=False, nullable=True)
     birthday = db.Column(db.Date,unique=False, nullable=True)
     role = db.Column(db.String(100),unique=False,nullable=True)
     about = db.Column(db.String(500),unique=False,nullable=True)
-    #add picture as well when you've got time (SQLAlchemy-ImageAttach)
+
 
 
 #uncomment to create database if not already in directory
@@ -47,19 +47,36 @@ def index():
 
 
 # Add User to database
-@app.route('/addUser', methods=['POST'])
+
+@app.route('/addUser', methods=['GET', 'POST'])
 def createuser() :
     firstname =  request.form['inputfirstname'];
-    db.execute("INSERT INTO User (firstname) VALUES (:firstname)",
-                 firstname=firstname)
+    lastname =  request.form['inputlastname'];
+    birthday =  request.form['inputbirthday'];
+    role =  request.form['inputrole'];
+    about =  request.form['inputabout'];
+
+    new_user = User(firstname=firstname, lastname=lastname, birthday=date(birthday), role=role, about=about)
+
+    db.session.add(new_user)
+    db.session.commit()
+
     return render_template("index.html")
 
+
+
+@app.route('/deleteUser', methods=['GET', 'POST'])
+def deleteuser():
+    pass
 
 
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
 
 
 
