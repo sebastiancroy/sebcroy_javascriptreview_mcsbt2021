@@ -13,7 +13,7 @@
 
 <!-- CONTAINER FOR DISPLAY (COLLUMN1) AND SUBMIT (COLLUMN2) -->
 
-            <div class="container">
+            <div class="container-fluid">
             <div class="row">
 
 
@@ -41,7 +41,7 @@
                   <p class="card-text">Role: {{user.role}}</p>
                   <p class="card-text">Birthday: {{user.birthday}}</p>
                   <p class="card-text">About: {{user.about}}</p>
-                  <a href="#" class="btn btn-danger">Remove Teammember</a>
+                  <button onclick="deleteUser('{{ user.id }}')" class="btn btn-danger">Remove Teammember</button>
                   </div>
                   </div>
 
@@ -65,13 +65,13 @@
 
 <!-- DECLARE THE FORM THAT JAVASCRIPT WILL LOOK FOR -->
 
-                <form method="POST" id="target" action="/addUser">
+                <form onsubmit="createUser()" method="dialog" id="target" >
 
 <!-- INPUT FOR FIRSTNAME -->
 
                   <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">First Name:</label>
-                  <input type="firstname" class="form-control" name="inputfirstname" id="inputfirstname" placeholder="John" formaction="/addUser">
+                  <input type="firstname" class="form-control" name="inputfirstname" id="inputfirstname" placeholder="John">
                   </div>
 
 <!-- INPUT FOR LASTNAME -->
@@ -117,11 +117,11 @@
                 <br>
                 <br>
                 </div>
-
-<!-- SOURCE FOR addUsers.js -->
-
+{% endblock %}
+<!-- SOURCE FOR addUsers.js and DeleteUsers.js -->
+{% block js  %}
 
         <script src="{{url_for('static', filename='addUsers.js')}}"></script>
+        <script src="{{url_for('static', filename='DeleteUsers.js')}}"></script>
 
 {% endblock %}
-
