@@ -1,3 +1,5 @@
+"use strict";
+
 const createUser = ()=>{
     console.log("Here", document.getElementById('inputfirstname').value);
     let new_event = {

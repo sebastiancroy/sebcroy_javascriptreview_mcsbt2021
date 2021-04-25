@@ -1,3 +1,4 @@
+
 const deleteUser = (id) => {
     console.log("here");
     fetch('/deleteUser/' + id, {
